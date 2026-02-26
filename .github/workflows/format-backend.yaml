@@ -1,5 +1,8 @@
 name: Python CI
 
+permissions:
+  issues: write
+
 on:
   push:
     branches:
@@ -30,6 +33,10 @@ jobs:
           - 3.12.x
 
     steps:
+      - uses: jfrog-fastci/fastci@v0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          accept_terms: 'yes'
       - uses: actions/checkout@v5
 
       - name: Set up Python

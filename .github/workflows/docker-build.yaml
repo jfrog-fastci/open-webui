@@ -1,5 +1,8 @@
 name: Create and publish Docker images with specific build args
 
+permissions:
+  issues: write
+
 on:
   workflow_dispatch:
   push:
@@ -18,6 +21,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      issues: write
     strategy:
       fail-fast: false
       matrix:
@@ -117,6 +121,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      issues: write
     strategy:
       fail-fast: false
       matrix:
@@ -222,6 +227,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      issues: write
     strategy:
       fail-fast: false
       matrix:
@@ -328,6 +334,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      issues: write
     strategy:
       fail-fast: false
       matrix:
@@ -430,6 +437,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      issues: write
     strategy:
       fail-fast: false
       matrix:

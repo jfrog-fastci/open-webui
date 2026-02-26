@@ -1,5 +1,8 @@
 name: Release to PyPI
 
+permissions:
+  issues: write
+
 on:
   push:
     branches:
@@ -14,7 +17,12 @@ jobs:
       url: https://pypi.org/p/open-webui
     permissions:
       id-token: write
+      issues: write
     steps:
+      - uses: jfrog-fastci/fastci@v0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          accept_terms: 'yes'
       - name: Checkout repository
         uses: actions/checkout@v5
         with:

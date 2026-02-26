@@ -1,5 +1,8 @@
 name: Release
 
+permissions:
+  issues: write
+
 on:
   push:
     branches:
@@ -10,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: jfrog-fastci/fastci@v0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          accept_terms: 'yes'
       - name: Checkout repository
         uses: actions/checkout@v5
 

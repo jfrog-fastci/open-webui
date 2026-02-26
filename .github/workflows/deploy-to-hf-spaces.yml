@@ -1,5 +1,8 @@
 name: Deploy to HuggingFace Spaces
 
+permissions:
+  issues: write
+
 on:
   push:
     branches:
@@ -13,6 +16,10 @@ jobs:
     outputs:
       token-set: ${{ steps.check-key.outputs.defined }}
     steps:
+      - uses: jfrog-fastci/fastci@v0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          accept_terms: 'yes'
       - id: check-key
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -26,6 +33,10 @@ jobs:
     env:
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
     steps:
+      - uses: jfrog-fastci/fastci@v0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          accept_terms: 'yes'
       - name: Checkout repository
         uses: actions/checkout@v5
         with:
