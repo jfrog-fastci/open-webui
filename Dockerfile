@@ -38,7 +38,12 @@ RUN apk add --no-cache git
 COPY package.json package-lock.json ./
 RUN npm ci --force
 
-COPY . .
+# Copy config and static assets first (change less frequently) for better cache utilization
+COPY scripts ./scripts
+COPY static ./static
+COPY vite.config.ts svelte.config.js tsconfig.json tailwind.config.js postcss.config.js i18next-parser.config.ts CHANGELOG.md ./
+# Copy source code last (changes most frequently) - keeps config layer cached when only src/ changes
+COPY src ./src
 ENV APP_BUILD_HASH=${BUILD_HASH}
 RUN npm run build
 
