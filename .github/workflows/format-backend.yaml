@@ -1,25 +1,13 @@
 name: Python CI
 
 permissions:
+  contents: read
   issues: write
 
 on:
-  push:
-    branches:
-      - main
-      - dev
-    paths:
-      - 'backend/**'
-      - 'pyproject.toml'
-      - 'uv.lock'
-  pull_request:
-    branches:
-      - main
-      - dev
-    paths:
-      - 'backend/**'
-      - 'pyproject.toml'
-      - 'uv.lock'
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   build:
@@ -34,9 +22,6 @@ jobs:
 
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       - uses: actions/checkout@v5
 
       - name: Set up Python

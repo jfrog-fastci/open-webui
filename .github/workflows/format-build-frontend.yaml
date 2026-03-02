@@ -1,25 +1,13 @@
 name: Frontend Build
 
 permissions:
+  contents: read
   issues: write
 
 on:
-  push:
-    branches:
-      - main
-      - dev
-    paths-ignore:
-      - 'backend/**'
-      - 'pyproject.toml'
-      - 'uv.lock'
-  pull_request:
-    branches:
-      - main
-      - dev
-    paths-ignore:
-      - 'backend/**'
-      - 'pyproject.toml'
-      - 'uv.lock'
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   build:
@@ -27,9 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       - name: Checkout Repository
         uses: actions/checkout@v5
 
@@ -59,9 +44,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       - name: Checkout Repository
         uses: actions/checkout@v5
 

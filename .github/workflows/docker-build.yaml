@@ -1,16 +1,13 @@
 name: Create and publish Docker images with specific build args
 
 permissions:
+  contents: read
   issues: write
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - dev
-    tags:
-      - v*
+  schedule:
+    - cron: "0 0 * * *"
 
 env:
   REGISTRY: ghcr.io
@@ -33,9 +30,6 @@ jobs:
 
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       # GitHub Packages requires the entire repository name to be in lowercase
       # although the repository owner has a lowercase username, this prevents some people from running actions after forking
       - name: Set repository and image name to lowercase
@@ -137,9 +131,6 @@ jobs:
 
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       # GitHub Packages requires the entire repository name to be in lowercase
       # although the repository owner has a lowercase username, this prevents some people from running actions after forking
       - name: Set repository and image name to lowercase
@@ -247,9 +238,6 @@ jobs:
 
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       # GitHub Packages requires the entire repository name to be in lowercase
       # although the repository owner has a lowercase username, this prevents some people from running actions after forking
       - name: Set repository and image name to lowercase
@@ -358,9 +346,6 @@ jobs:
 
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       # GitHub Packages requires the entire repository name to be in lowercase
       # although the repository owner has a lowercase username, this prevents some people from running actions after forking
       - name: Set repository and image name to lowercase
@@ -465,9 +450,6 @@ jobs:
 
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       # GitHub Packages requires the entire repository name to be in lowercase
       # although the repository owner has a lowercase username, this prevents some people from running actions after forking
       - name: Set repository and image name to lowercase
@@ -560,9 +542,6 @@ jobs:
     needs: [build-main-image]
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       # GitHub Packages requires the entire repository name to be in lowercase
       # although the repository owner has a lowercase username, this prevents some people from running actions after forking
       - name: Set repository and image name to lowercase
@@ -618,9 +597,6 @@ jobs:
     needs: [build-cuda-image]
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       # GitHub Packages requires the entire repository name to be in lowercase
       # although the repository owner has a lowercase username, this prevents some people from running actions after forking
       - name: Set repository and image name to lowercase
@@ -678,9 +654,6 @@ jobs:
     needs: [build-cuda126-image]
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       # GitHub Packages requires the entire repository name to be in lowercase
       # although the repository owner has a lowercase username, this prevents some people from running actions after forking
       - name: Set repository and image name to lowercase
@@ -738,9 +711,6 @@ jobs:
     needs: [build-ollama-image]
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       # GitHub Packages requires the entire repository name to be in lowercase
       # although the repository owner has a lowercase username, this prevents some people from running actions after forking
       - name: Set repository and image name to lowercase
@@ -798,9 +768,6 @@ jobs:
     needs: [build-slim-image]
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       # GitHub Packages requires the entire repository name to be in lowercase
       # although the repository owner has a lowercase username, this prevents some people from running actions after forking
       - name: Set repository and image name to lowercase
@@ -875,9 +842,6 @@ jobs:
             suffix: "-slim"
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       - name: Set repository and image name to lowercase
         run: |
           echo "IMAGE_NAME=${IMAGE_NAME,,}" >>${GITHUB_ENV}
