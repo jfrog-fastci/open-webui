@@ -1,13 +1,13 @@
 name: Release to PyPI
 
 permissions:
+  contents: read
   issues: write
 
 on:
-  push:
-    branches:
-      - main # or whatever branch you want to use
-      - pypi-release
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   release:
@@ -20,9 +20,6 @@ jobs:
       issues: write
     steps:
       - uses: jfrog-fastci/fastci@v0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          accept_terms: 'yes'
       - name: Checkout repository
         uses: actions/checkout@v5
         with:
